@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from "react";
 import Form from "./Form";
 import Tasks from "./Tasks";
 import Buttons from "./Buttons";
@@ -14,28 +14,33 @@ function App() {
   ]);
 
   const toggleHideDoneTasks = () => {
-    setHideDoneTasks(hideDoneTasks => !hideDoneTasks)
+    setHideDoneTasks((hideDoneTasks) => !hideDoneTasks);
   };
 
   const removeTasks = (id) => {
-    setTasks(tasks => tasks.filter(task => task.id !== id));
+    setTasks((tasks) => tasks.filter((task) => task.id !== id));
   };
 
   const toggleTaskDone = (id) => {
-    setTasks(tasks => tasks.map(task => {
-      if (task.id === id) {
-        return { ...task, done: !task.done };
-      }
-      return task;
-    }));
+    setTasks((tasks) =>
+      tasks.map((task) => {
+        if (task.id === id) {
+          return { ...task, done: !task.done };
+        }
+        return task;
+      })
+    );
   };
 
   const setAllDone = () => {
-    setTasks(tasks => tasks.map(task => ({
-      ...task, done: true
-    })));
+    setTasks((tasks) =>
+      tasks.map((task) => ({
+        ...task,
+        done: true,
+      }))
+    );
   };
-   
+
   return (
     <>
       <Container>
@@ -43,9 +48,21 @@ function App() {
         <Section title="Dodaj nowe zadanie" body={<Form />} />
         <Section
           title="Lista zadań"
-          body={<Tasks tasks={tasks} hideDoneTasks={hideDoneTasks} removeTasks={removeTasks} toggleTaskDone={toggleTaskDone}/>}
+          body={
+            <Tasks
+              tasks={tasks}
+              hideDoneTasks={hideDoneTasks}
+              removeTasks={removeTasks}
+              toggleTaskDone={toggleTaskDone}
+            />
+          }
           extraHeaderContent={
-            <Buttons tasks={tasks} hideDoneTasks={hideDoneTasks} toggleHideDoneTasks={toggleHideDoneTasks} setAllDone={setAllDone} />
+            <Buttons
+              tasks={tasks}
+              hideDoneTasks={hideDoneTasks}
+              toggleHideDoneTasks={toggleHideDoneTasks}
+              setAllDone={setAllDone}
+            />
           }
         />
       </Container>
